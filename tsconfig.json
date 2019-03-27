@@ -3,11 +3,14 @@
     "src"
   ],
   "compilerOptions": {
+    "moduleResolution": "node",
     "outDir": "dist",
-    "target": "es2017"
+    "target": "es2017",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true
   },
-  "experimentalDecorators": true,
-  "emitDecoratorMetadata": true,
   "exclude": [
     "node_modules"
   ]
