@@ -1,0 +1,14 @@
+{
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "target": "es2017"
+  },
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
+  "exclude": [
+    "node_modules"
+  ]
+}
