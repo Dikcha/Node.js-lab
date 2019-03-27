@@ -1,0 +1,17 @@
+{
+  "name": "lab21",
+  "version": "1.0.0",
+  "description": "lab 21 project",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dikcha",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "sequelize": "^5.2.1",
+    "sequelize-typescript": "^0.6.8",
+    "typescript": "^2.8.4"
+  }
+}
