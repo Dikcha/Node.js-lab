@@ -7,6 +7,7 @@ const constPath = 'src/**/!(*.js|*.ts)'
 const backendPath = 'src';
 const backendDistPath = 'dist';
 const tscPath = path.join('node_modules', '.bin', 'tsc');
+require('dotenv').config()
 
 function cleanDist() {
     return gulp.src('dist', { read: false, allowEmpty: true }).pipe(clean());
@@ -17,7 +18,31 @@ async function copyConstFiles() {
         .pipe(gulp.dest(backendDistPath));
 }
 
+async function sequelizeSync() {
+    const sequelize = sequelizeInit();
+    try {
+        await sequelize.sync();
+    }
+    catch (err) {
+        throw err;
+    }
+    finally {
+        await sequelize.close();
+    }
+}
+
+function sequelizeInit() {
+    const sequelize = require('./dist/database/sequelize/index');
+
+    return sequelize;
+}
+
 const tsc = shell.task(tscPath);
 const build = gulp.series(cleanDist, tsc, copyConstFiles);
+const dbInit = gulp.series(
+    sequelizeSync,
+    build
+);
 
 gulp.task('build', build);
+gulp.task('db-init', dbInit);

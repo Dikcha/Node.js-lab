@@ -1,6 +1,13 @@
-import { AllowNull, AutoIncrement, BelongsTo, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
-import { PropertiesModel } from "../properties";
-import { OfficesModel } from "../offices";
+import {
+    AllowNull,
+    AutoIncrement,
+    Column,
+    DataType,
+    Model,
+    PrimaryKey,
+    Table
+} from "sequelize-typescript";
+
 
 @Table({
     tableName: 'agents',
@@ -11,23 +18,21 @@ export class AgentsModel extends Model<AgentsModel> {
     @AutoIncrement
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
-    @HasMany(() => PropertiesModel)
-    id: number
+    id: number;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    name: string
+    name: string;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    email: string
+    email: string;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    tel: string
+    tel: string;
 
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
-    @BelongsTo(() => OfficesModel)
-    officeId: number
+    officeId: number;
 }

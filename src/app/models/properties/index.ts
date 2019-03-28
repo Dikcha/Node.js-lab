@@ -1,5 +1,12 @@
-import { AllowNull, AutoIncrement, BelongsTo, Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
-import { AgentsModel } from "../agents";
+import {
+    AllowNull,
+    AutoIncrement,
+    Column,
+    DataType,
+    Model,
+    PrimaryKey,
+    Table
+} from "sequelize-typescript";
 
 @Table({
     tableName: 'properties',
@@ -10,26 +17,25 @@ export class PropertiesModel extends Model<PropertiesModel> {
     @AutoIncrement
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
-    id: number
+    id: number;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    heading: string
+    heading: string;
 
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
-    price: number
+    price: number;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    currency: string
+    currency: string;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    location: string
+    location: string;
 
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
-    @BelongsTo(() => AgentsModel)
-    agentId: number
+    agentId: number;
 }
