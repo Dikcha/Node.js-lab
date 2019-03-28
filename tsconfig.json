@@ -9,7 +9,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noUnusedParameters": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules"

@@ -1,5 +1,5 @@
-import {Sequelize} from 'sequelize-typescript';
-import {PropertiesModel} from "../models/properties";
+import { Sequelize } from 'sequelize-typescript';
+import { PropertiesModel } from "../models/properties";
 
 const sequelize = new Sequelize({
     database: process.env.DBNAME,
