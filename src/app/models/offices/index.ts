@@ -1,4 +1,5 @@
-import { AllowNull, AutoIncrement, Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
+import {AllowNull, AutoIncrement, Column, DataType, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
+import { AgentsModel } from "../agents";
 
 @Table({
     tableName: 'offices',
@@ -10,6 +11,9 @@ export class OfficesModel extends Model<OfficesModel> {
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
     id: number;
+
+    @HasMany(() => AgentsModel)
+    agents: AgentsModel;
 
     @AllowNull(false)
     @Column(DataType.STRING)

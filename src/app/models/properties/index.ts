@@ -2,11 +2,13 @@ import {
     AllowNull,
     AutoIncrement,
     Column,
-    DataType,
+    DataType, ForeignKey,
     Model,
     PrimaryKey,
     Table
 } from "sequelize-typescript";
+import { AgentsModel } from "../agents";
+import { BelongsTo } from "sequelize-typescript/lib/annotations/association/BelongsTo";
 
 @Table({
     tableName: 'properties',
@@ -37,5 +39,9 @@ export class PropertiesModel extends Model<PropertiesModel> {
 
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
+    @ForeignKey(() => AgentsModel)
     agentId: number;
+
+    @BelongsTo(() => AgentsModel)
+    agent: AgentsModel
 }

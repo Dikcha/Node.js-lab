@@ -5,8 +5,11 @@ import {
     DataType,
     Model,
     PrimaryKey,
-    Table
+    Table,
+    HasMany, ForeignKey, BelongsTo
 } from "sequelize-typescript";
+import { PropertiesModel } from "../properties";
+import { OfficesModel } from "../offices";
 
 
 @Table({
@@ -19,6 +22,9 @@ export class AgentsModel extends Model<AgentsModel> {
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
     id: number;
+
+    @HasMany(() => PropertiesModel)
+    properties: PropertiesModel;
 
     @AllowNull(false)
     @Column(DataType.STRING)
@@ -34,5 +40,9 @@ export class AgentsModel extends Model<AgentsModel> {
 
     @AllowNull(false)
     @Column(DataType.BIGINT.UNSIGNED)
+    @ForeignKey(() => OfficesModel)
     officeId: number;
+
+    @BelongsTo(() => OfficesModel)
+    office: OfficesModel;
 }

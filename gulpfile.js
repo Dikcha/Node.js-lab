@@ -21,7 +21,7 @@ async function copyConstFiles() {
 async function sequelizeSync() {
     const sequelize = sequelizeInit();
     try {
-        await sequelize.sync();
+        await sequelize.sync({ force: true });
     }
     catch (err) {
         throw err;
