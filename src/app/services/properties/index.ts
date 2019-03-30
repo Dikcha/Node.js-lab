@@ -14,7 +14,7 @@ export class PropertiesService extends Service {
     }
 
     async getListOfProperties(req) {
-        const {limit, offset, sortField, sortOrder}: IMeta = await this.getMeta(req);
+        const { limit, offset, sortField, sortOrder }: IMeta = await this.getMeta(req);
 
         return await PropertiesModel.findAll({
             limit,
@@ -29,7 +29,7 @@ export class PropertiesService extends Service {
     async getPropertyById(propertyId) {
         validateId(propertyId);
         await this.checkIfPropertyExistById(propertyId);
-        
+
         return await PropertiesModel.findById(propertyId, {
             raw: true,
         });
@@ -69,7 +69,7 @@ export class PropertiesService extends Service {
         await this.checkIfPropertyExistById(propertyId);
         await this.checkIfAgentExistById(agentId);
 
-        await PropertiesModel.update({ agentId }, {
+        await PropertiesModel.update({agentId}, {
             where: {
                 id: propertyId,
             },
@@ -82,7 +82,7 @@ export class PropertiesService extends Service {
         validateUnbindAgent(propertyId);
         await this.checkIfPropertyExistById(propertyId);
 
-        await PropertiesModel.update({ agentId: null }, {
+        await PropertiesModel.update({agentId: null}, {
             where: {
                 id: propertyId,
             },
