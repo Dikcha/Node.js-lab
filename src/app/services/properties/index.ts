@@ -2,6 +2,7 @@ import { Service } from "../base";
 import { IMeta } from "../base/interfaces";
 import { PropertiesModel } from "../../models/properties";
 import { validateId } from "../../modules/validator/get_property_by_id";
+import { validateProperty } from "../../modules/validator/create_property";
 
 export class PropertiesService extends Service {
     constructor() {
@@ -27,5 +28,11 @@ export class PropertiesService extends Service {
         return await PropertiesModel.findById(propertyId,{
             raw: true,
         });
+    }
+
+    async createProperty(property) {
+        validateProperty(property);
+
+        return await PropertiesModel.create(property);
     }
 }
