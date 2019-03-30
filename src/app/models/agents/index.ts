@@ -6,7 +6,9 @@ import {
     Model,
     PrimaryKey,
     Table,
-    HasMany, ForeignKey, BelongsTo
+    HasMany,
+    ForeignKey,
+    BelongsTo
 } from "sequelize-typescript";
 import { PropertiesModel } from "../properties";
 import { OfficesModel } from "../offices";

@@ -18,5 +18,4 @@ sequelize.addModels([
     AgentsModel,
     OfficesModel,
 ])
-
 module.exports = sequelize;

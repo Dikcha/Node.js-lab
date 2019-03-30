@@ -1,5 +1,24 @@
-import { BaseService } from "../base";
+import { Service } from "../base";
+import { IMeta } from "../base/interfaces";
+import { PropertiesModel } from "../../models/properties";
+export class PropertiesService extends Service {
+    constructor() {
+        super();
+    }
 
-export class PropertiesService extends BaseService {
+    async getListOfProperties(req) {
+        const { limit, offset, sortField, sortOrder }: IMeta = await this.getMeta(req);
 
+        console.log(limit);
+        console.log(offset);
+
+        return await PropertiesModel.findAll({
+            limit,
+            offset,
+            order: [
+                [sortField, sortOrder],
+            ],
+            raw: true,
+        })
+    }
 }

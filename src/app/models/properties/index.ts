@@ -2,7 +2,8 @@ import {
     AllowNull,
     AutoIncrement,
     Column,
-    DataType, ForeignKey,
+    DataType,
+    ForeignKey,
     Model,
     PrimaryKey,
     Table

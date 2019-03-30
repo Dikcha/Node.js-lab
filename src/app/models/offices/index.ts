@@ -1,4 +1,4 @@
-import {AllowNull, AutoIncrement, Column, DataType, HasMany, Model, PrimaryKey, Table} from "sequelize-typescript";
+import { AllowNull, AutoIncrement, Column, DataType, HasMany, Model, PrimaryKey, Table } from "sequelize-typescript";
 import { AgentsModel } from "../agents";
 
 @Table({
