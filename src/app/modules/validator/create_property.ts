@@ -1,11 +1,10 @@
 import * as joi from 'joi';
-import { propertySchema } from "./schemas/property";
+import { createPropertySchema } from "./schemas/create_property";
 
-export function validateProperty(property) {
-    const result = joi.validate(property, propertySchema);
+export function validateCreateProperty(property) {
+    const result = joi.validate(property, createPropertySchema);
 
     if(result.error) {
         throw new Error('Invalid property');
     }
-
 }

@@ -2,7 +2,8 @@ import { Service } from "../base";
 import { IMeta } from "../base/interfaces";
 import { PropertiesModel } from "../../models/properties";
 import { validateId } from "../../modules/validator/get_property_by_id";
-import { validateProperty } from "../../modules/validator/create_property";
+import { validateCreateProperty } from "../../modules/validator/create_property";
+import { validateUpdateProperty } from "../../modules/validator/udpdate_property";
 
 export class PropertiesService extends Service {
     constructor() {
@@ -31,8 +32,20 @@ export class PropertiesService extends Service {
     }
 
     async createProperty(property) {
-        validateProperty(property);
+        validateCreateProperty(property);
 
         return await PropertiesModel.create(property);
+    }
+
+    async updateProperty(propertyId, property) {
+        validateUpdateProperty(property);
+
+        await PropertiesModel.update(property, {
+            where: {
+              id: propertyId,
+            },
+        });
+
+        return await PropertiesModel.findById(propertyId);
     }
 }
