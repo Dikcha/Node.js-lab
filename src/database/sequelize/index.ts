@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { PropertiesModel } from "../../app/models/properties";
 import { AgentsModel } from "../../app/models/agents";
 import { OfficesModel } from "../../app/models/offices";
+require('dotenv').config();
 
 const sequelize = new Sequelize({
     database: process.env.DBNAME,
@@ -18,4 +19,4 @@ sequelize.addModels([
     AgentsModel,
     OfficesModel,
 ])
-module.exports = sequelize;
+export const db = sequelize;

@@ -8,10 +8,7 @@ export class PropertiesService extends Service {
 
     async getListOfProperties(req) {
         const { limit, offset, sortField, sortOrder }: IMeta = await this.getMeta(req);
-
-        console.log(limit);
-        console.log(offset);
-
+        
         return await PropertiesModel.findAll({
             limit,
             offset,
