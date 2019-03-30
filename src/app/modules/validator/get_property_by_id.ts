@@ -1,7 +1,7 @@
 import * as joi from 'joi';
 
 export function validateId(id) {
-    const result = joi.validate(id, joi.number().required());
+    const result = joi.validate(id, joi.number().min(1).required());
 
     if (result.error) {
         throw new Error('Id should be a number');

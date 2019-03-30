@@ -4,3 +4,4 @@ export * from './create_property';
 export * from './update_property';
 export * from './delete_property';
 export * from './bind_agent_to_property';
+export * from './unbind_agent';
