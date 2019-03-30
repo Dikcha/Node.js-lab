@@ -32,7 +32,7 @@ async function sequelizeSync() {
 }
 
 function sequelizeInit() {
-    const sequelize = require('./dist/database/sequelize/index');
+    const sequelize = require('./dist/database/sequelize/index').db;
 
     return sequelize;
 }

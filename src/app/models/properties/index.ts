@@ -38,7 +38,7 @@ export class PropertiesModel extends Model<PropertiesModel> {
     @Column(DataType.STRING)
     location: string;
 
-    @AllowNull(false)
+    @AllowNull(true)
     @Column(DataType.BIGINT.UNSIGNED)
     @ForeignKey(() => AgentsModel)
     agentId: number;
