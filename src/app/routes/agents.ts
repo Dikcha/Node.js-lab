@@ -27,4 +27,16 @@ router.get('/:id', async (req, res, next) => {
    }
 });
 
+router.post('/create', async (req, res, next) => {
+   try {
+       const agent = req.body;
+       const result = await AgentsCtrl.createAgent(agent);
+
+       res.status(HttpStatus.CREATED).json(result);
+
+   } catch (err) {
+       next(err);
+   }
+});
+
 export const AgentsRouter = router;

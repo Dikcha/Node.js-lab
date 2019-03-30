@@ -40,7 +40,7 @@ export class AgentsModel extends Model<AgentsModel> {
     @Column(DataType.STRING)
     tel: string;
 
-    @AllowNull(false)
+    @AllowNull(true)
     @Column(DataType.BIGINT.UNSIGNED)
     @ForeignKey(() => OfficesModel)
     officeId: number;
