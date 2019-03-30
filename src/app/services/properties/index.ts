@@ -4,6 +4,8 @@ import { PropertiesModel } from "../../models/properties";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { validateCreateProperty } from "../../modules/validator/create_property";
 import { validateUpdateProperty } from "../../modules/validator/udpdate_property";
+import { AgentsModel } from "../../models/agents";
+import { validateBindAgentToProperty } from "../../modules/validator/bind_agent_to_property";
 
 export class PropertiesService extends Service {
     constructor() {
@@ -57,5 +59,44 @@ export class PropertiesService extends Service {
                 id: propertyId,
             },
         });
+    }
+
+    async bindAgentToProperty(propertyId, agentId) {
+        validateBindAgentToProperty(propertyId, agentId);
+        await this.checkIfPropertyExistById(propertyId);
+        await this.checkIfAgentExistById(agentId);
+
+        await PropertiesModel.update({ agentId }, {
+            where: {
+                id: propertyId,
+            },
+        });
+
+        return await PropertiesModel.findById(propertyId);
+    }
+
+
+    private async checkIfPropertyExistById(propertyId) {
+        const property = await PropertiesModel.findOne({
+            where: {
+                id: propertyId,
+            },
+        });
+
+        if (!property) {
+            throw new Error('Property id does not exist');
+        }
+    }
+
+    private async checkIfAgentExistById(agentId) {
+        const property = await AgentsModel.findOne({
+            where: {
+                id: agentId,
+            },
+        });
+
+        if (!property) {
+            throw new Error('Agent id does not exist');
+        }
     }
 }

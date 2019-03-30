@@ -59,4 +59,18 @@ router.delete('/delete', async (req, res, next) => {
     }
 });
 
+router.put('/bind', async (req, res, next) => {
+   try {
+       const propertyId = req.body.propertyId;
+       const agentId = req.body.agentId;
+
+       const result = await PropertiesCtrl.bindAgentToProperty(propertyId, agentId);
+
+       res.status(HttpStatus.OK).json(result);
+
+   } catch (err) {
+       next(err);
+   }
+});
+
 export const PropertiesRouter = router;
