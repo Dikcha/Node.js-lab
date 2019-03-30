@@ -14,4 +14,16 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const propertyId = +req.params.id;
+        const result = await PropertiesCtrl.getPropertyById(propertyId);
+
+        res.status(HttpStatus.OK).json(result);
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
 export const PropertiesRouter =  router;
