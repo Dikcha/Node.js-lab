@@ -11,7 +11,7 @@ export class PropertiesService extends Service {
     }
 
     async getListOfProperties(req) {
-        const { limit, offset, sortField, sortOrder }: IMeta = await this.getMeta(req);
+        const {limit, offset, sortField, sortOrder}: IMeta = await this.getMeta(req);
 
         return await PropertiesModel.findAll({
             limit,
@@ -26,7 +26,7 @@ export class PropertiesService extends Service {
     async getPropertyById(propertyId) {
         validateId(propertyId);
 
-        return await PropertiesModel.findById(propertyId,{
+        return await PropertiesModel.findById(propertyId, {
             raw: true,
         });
     }
@@ -42,10 +42,20 @@ export class PropertiesService extends Service {
 
         await PropertiesModel.update(property, {
             where: {
-              id: propertyId,
+                id: propertyId,
             },
         });
 
         return await PropertiesModel.findById(propertyId);
+    }
+
+    async deleteProperty(propertyId) {
+        validateId(propertyId);
+
+        await PropertiesModel.destroy({
+            where: {
+                id: propertyId,
+            },
+        });
     }
 }
