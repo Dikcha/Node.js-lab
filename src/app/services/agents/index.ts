@@ -1,6 +1,8 @@
 import { Service } from "../base";
 import { IMeta } from "../base/interfaces";
 import { AgentsModel } from "../../models/agents";
+import { validateId } from "../../modules/validator/get_property_by_id";
+import { checkIfAgentExistById } from "../../models/agents/methods";
 
 export class AgentsService extends Service {
     constructor() {
@@ -18,5 +20,14 @@ export class AgentsService extends Service {
             ],
             raw: true,
         })
+    }
+
+    async getAgentById(agentId) {
+        validateId(agentId);
+        await checkIfAgentExistById(agentId);
+
+        return await AgentsModel.findById(agentId, {
+            raw: true,
+        });
     }
 }

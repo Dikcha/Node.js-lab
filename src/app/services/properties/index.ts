@@ -4,9 +4,10 @@ import { PropertiesModel } from "../../models/properties";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { validateCreateProperty } from "../../modules/validator/create_property";
 import { validateUpdateProperty } from "../../modules/validator/udpdate_property";
-import { AgentsModel } from "../../models/agents";
 import { validateBindAgentToProperty } from "../../modules/validator/bind_agent_to_property";
 import { validateUnbindAgent } from "../../modules/validator/unbind_agent";
+import { checkIfPropertyExistById } from "../../models/properties/methods";
+import { checkIfAgentExistById } from "../../models/agents/methods";
 
 export class PropertiesService extends Service {
     constructor() {
@@ -28,7 +29,7 @@ export class PropertiesService extends Service {
 
     async getPropertyById(propertyId) {
         validateId(propertyId);
-        await this.checkIfPropertyExistById(propertyId);
+        await checkIfPropertyExistById(propertyId);
 
         return await PropertiesModel.findById(propertyId, {
             raw: true,
@@ -43,7 +44,7 @@ export class PropertiesService extends Service {
 
     async updateProperty(propertyId, property) {
         validateUpdateProperty(property);
-        await this.checkIfPropertyExistById(propertyId);
+        await checkIfPropertyExistById(propertyId);
 
         await PropertiesModel.update(property, {
             where: {
@@ -66,8 +67,8 @@ export class PropertiesService extends Service {
 
     async bindAgentToProperty(propertyId, agentId) {
         validateBindAgentToProperty(propertyId, agentId);
-        await this.checkIfPropertyExistById(propertyId);
-        await this.checkIfAgentExistById(agentId);
+        await checkIfPropertyExistById(propertyId);
+        await checkIfAgentExistById(agentId);
 
         await PropertiesModel.update({agentId}, {
             where: {
@@ -80,7 +81,7 @@ export class PropertiesService extends Service {
 
     async unbindAgent(propertyId) {
         validateUnbindAgent(propertyId);
-        await this.checkIfPropertyExistById(propertyId);
+        await checkIfPropertyExistById(propertyId);
 
         await PropertiesModel.update({agentId: null}, {
             where: {
@@ -89,29 +90,5 @@ export class PropertiesService extends Service {
         });
 
         return await PropertiesModel.findById(propertyId);
-    }
-
-    private async checkIfPropertyExistById(propertyId) {
-        const property = await PropertiesModel.findOne({
-            where: {
-                id: propertyId,
-            },
-        });
-
-        if (!property) {
-            throw new Error('Property id does not exist');
-        }
-    }
-
-    private async checkIfAgentExistById(agentId) {
-        const property = await AgentsModel.findOne({
-            where: {
-                id: agentId,
-            },
-        });
-
-        if (!property) {
-            throw new Error('Agent id does not exist');
-        }
     }
 }
