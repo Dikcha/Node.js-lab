@@ -46,6 +46,7 @@ router.put('/update/:id', async (req, res, next) => {
         const result = await AgentsCtrl.updateAgent(agentId, agent);
 
         res.status(HttpStatus.OK).json(result);
+
     } catch (err) {
         next(err);
     }
@@ -57,9 +58,24 @@ router.delete('/delete', async (req, res, next) => {
         const result = await AgentsCtrl.deleteAgent(id);
 
         res.status(HttpStatus.OK).json(result);
+
     } catch (err) {
         next(err);
     }
+});
+
+router.put('/bind', async (req, res, next) => {
+   try {
+       const officeId = req.body.officeId;
+       const agentId = req.body.agentId;
+
+       const result = await AgentsCtrl.bindAgentToProperty(officeId, agentId);
+
+       res.status(HttpStatus.OK).json(result);
+
+   } catch (err) {
+       next(err);
+   }
 });
 
 export const AgentsRouter = router;

@@ -70,7 +70,7 @@ export class PropertiesService extends Service {
         await checkIfPropertyExistById(propertyId);
         await checkIfAgentExistById(agentId);
 
-        await PropertiesModel.update({agentId}, {
+        await PropertiesModel.update({ agentId }, {
             where: {
                 id: propertyId,
             },
@@ -83,7 +83,7 @@ export class PropertiesService extends Service {
         validateUnbindAgent(propertyId);
         await checkIfPropertyExistById(propertyId);
 
-        await PropertiesModel.update({agentId: null}, {
+        await PropertiesModel.update({ agentId: null }, {
             where: {
                 id: propertyId,
             },

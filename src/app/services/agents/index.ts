@@ -5,6 +5,8 @@ import { validateId } from "../../modules/validator/get_property_by_id";
 import { checkIfAgentExistById } from "../../models/agents/methods";
 import { validateCreateAgent } from "../../modules/validator/create_agent";
 import { validateUpdateAgent } from "../../modules/validator/update_agent";
+import { validateBindAgentToOffice } from "../../modules/validator/bind_agent_to_office";
+import { checkIfOfficeExistById } from "../../models/offices/methods";
 
 export class AgentsService extends Service {
     constructor() {
@@ -60,5 +62,19 @@ export class AgentsService extends Service {
                 id: agentId,
             },
         });
+    }
+
+    async bindAgentToOffice(officeId, agentId) {
+        validateBindAgentToOffice(officeId, agentId);
+        await checkIfOfficeExistById(officeId);
+        await checkIfAgentExistById(agentId);
+
+        await AgentsModel.update({ officeId }, {
+            where: {
+                id: agentId,
+            },
+        });
+
+        return await AgentsModel.findById(agentId);
     }
 }
