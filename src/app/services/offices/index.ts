@@ -5,6 +5,8 @@ import { validateId } from "../../modules/validator/get_property_by_id";
 import { checkIfOfficeExistById } from "../../models/offices/methods";
 import { validateCreateOffice } from "../../modules/validator/create_office";
 import { validateUpdateOffice } from "../../modules/validator/udapte_office";
+import { getLimitFromRequest, getOffsetFromRequest } from "../../modules/helper";
+import { AgentsModel } from "../../models/agents";
 
 export class OfficesService extends Service {
     constructor() {
@@ -59,6 +61,21 @@ export class OfficesService extends Service {
             where: {
                 id: officeId,
             },
+        });
+    }
+
+    async getListOfOfficesAgents(req) {
+        const officeId = +req.params.id;
+        validateId(officeId);
+        const limit = getLimitFromRequest(req);
+        const offset = (getOffsetFromRequest(req) - 1) * limit;
+
+        return await AgentsModel.findAll({
+            where: {
+                officeId,
+            },
+            limit,
+            offset,
         });
     }
 }

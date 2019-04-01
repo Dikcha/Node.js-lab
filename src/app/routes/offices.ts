@@ -64,5 +64,16 @@ router.delete('/delete', async (req, res, next) => {
     }
 });
 
+router.get('/:id/agents', async (req, res, next) => {
+    try {
+        const result = await OfficesCtrl.getListOfOfficesAgents(req);
+
+        res.status(HttpStatus.OK).json(result);
+
+    } catch (err) {
+        next(err);
+    }
+});
+
 
 export const OfficesRouter = router;
