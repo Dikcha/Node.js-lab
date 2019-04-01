@@ -4,7 +4,7 @@ import { AgentsModel } from "../../models/agents";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { checkIfAgentExistById } from "../../models/agents/methods";
 import { validateCreateAgent } from "../../modules/validator/create_agent";
-
+import { validateUpdateAgent } from "../../modules/validator/update_agent";
 
 export class AgentsService extends Service {
     constructor() {
@@ -37,5 +37,18 @@ export class AgentsService extends Service {
         validateCreateAgent(agent);
 
         return await AgentsModel.create(agent);
+    }
+
+    async updateAgent(agentId, agent) {
+        validateUpdateAgent(agent);
+        await checkIfAgentExistById(agentId);
+
+        await AgentsModel.update(agent, {
+            where: {
+                id: agentId,
+            },
+        });
+
+        return await AgentsModel.findById(agentId);
     }
 }

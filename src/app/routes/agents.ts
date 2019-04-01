@@ -39,4 +39,16 @@ router.post('/create', async (req, res, next) => {
    }
 });
 
+router.put('/update/:id', async (req, res, next) => {
+    try {
+        const agentId = +req.params.id;
+        const agent = req.body;
+        const result = await AgentsCtrl.updateAgent(agentId, agent);
+
+        res.status(HttpStatus.OK).json(result);
+    } catch (err) {
+        next(err);
+    }
+})
+
 export const AgentsRouter = router;
