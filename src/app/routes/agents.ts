@@ -91,6 +91,15 @@ router.put('/unbind', async (req, res, next) => {
     }
 });
 
+router.get('/:id/properties', async (req, res, next) => {
+   try {
+       const result = await AgentsCtrl.getListOfAgentProperties(req);
 
+       res.status(HttpStatus.OK).json(result);
+
+   } catch (err) {
+       next(err);
+   }
+});
 
 export const AgentsRouter = router;

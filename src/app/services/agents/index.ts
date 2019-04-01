@@ -8,6 +8,8 @@ import { validateUpdateAgent } from "../../modules/validator/update_agent";
 import { validateBindAgentToOffice } from "../../modules/validator/bind_agent_to_office";
 import { checkIfOfficeExistById } from "../../models/offices/methods";
 import { validateUnbindOffice } from "../../modules/validator/unbind_office";
+import { PropertiesModel } from "../../models/properties";
+import { getLimitFromRequest, getOffsetFromRequest } from "../../modules/helper";
 
 export class AgentsService extends Service {
     constructor() {
@@ -15,7 +17,7 @@ export class AgentsService extends Service {
     }
 
     async getListOfAgents(req) {
-        const { limit, offset, sortField, sortOrder }: IMeta = await this.getMeta(req);
+        const {limit, offset, sortField, sortOrder}: IMeta = await this.getMeta(req);
 
         return await AgentsModel.findAll({
             limit,
@@ -70,7 +72,7 @@ export class AgentsService extends Service {
         await checkIfOfficeExistById(officeId);
         await checkIfAgentExistById(agentId);
 
-        await AgentsModel.update({ officeId }, {
+        await AgentsModel.update({officeId}, {
             where: {
                 id: agentId,
             },
@@ -83,12 +85,27 @@ export class AgentsService extends Service {
         validateUnbindOffice(agentId);
         await checkIfAgentExistById(agentId);
 
-        await AgentsModel.update({ officeId: null }, {
+        await AgentsModel.update({officeId: null}, {
             where: {
                 id: agentId,
             },
         });
 
         return await AgentsModel.findById(agentId);
+    }
+
+    async getListOfAgentProperties(req) {
+        const agentId = +req.params.id;
+        validateId(agentId);
+        const limit = getLimitFromRequest(req);
+        const offset = (getOffsetFromRequest(req) - 1) * limit;
+
+        return await PropertiesModel.findAll({
+            where: {
+                agentId,
+            },
+            limit,
+            offset,
+        });
     }
 }

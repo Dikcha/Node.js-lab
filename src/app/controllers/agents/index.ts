@@ -5,3 +5,4 @@ export * from './update_agent';
 export * from './delete_agent';
 export * from './bind_agent_to_office';
 export * from './unbind_office';
+export * from './get_list_of_agent_properties';
