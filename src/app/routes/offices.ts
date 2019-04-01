@@ -39,6 +39,19 @@ router.post('/create', async (req, res, next) => {
     }
 });
 
+router.put('/update/:id', async (req, res, next) => {
+    try {
+        const officeId = +req.params.id;
+        const office = req.body;
+        const result = await OfficesCtrl.updateOffice(officeId, office);
+
+        res.status(HttpStatus.OK).json(result);
+
+    } catch (err) {
+        next(err);
+    }
+});
+
 
 
 export const OfficesRouter = router;

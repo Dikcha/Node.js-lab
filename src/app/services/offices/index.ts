@@ -4,6 +4,7 @@ import { OfficesModel } from "../../models/offices";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { checkIfOfficeExistById } from "../../models/offices/methods";
 import { validateCreateOffice } from "../../modules/validator/create_office";
+import { validateUpdateOffice } from "../../modules/validator/udapte_office";
 
 export class OfficesService extends Service {
     constructor() {
@@ -36,6 +37,19 @@ export class OfficesService extends Service {
         validateCreateOffice(office);
 
         return await OfficesModel.create(office);
+    }
+
+    async updateOffice(officeId, office) {
+        validateId(officeId);
+        validateUpdateOffice(office);
+
+        await OfficesModel.update(office, {
+            where: {
+                id: officeId,
+            },
+        });
+
+        return await OfficesModel.findById(officeId);
     }
 
 }
