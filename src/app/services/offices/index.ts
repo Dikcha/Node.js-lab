@@ -3,6 +3,7 @@ import { IMeta } from "../base/interfaces";
 import { OfficesModel } from "../../models/offices";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { checkIfOfficeExistById } from "../../models/offices/methods";
+import { validateCreateOffice } from "../../modules/validator/create_office";
 
 export class OfficesService extends Service {
     constructor() {
@@ -30,4 +31,11 @@ export class OfficesService extends Service {
             raw: true,
         });
     }
+
+    async createOffice(office) {
+        validateCreateOffice(office);
+
+        return await OfficesModel.create(office);
+    }
+
 }

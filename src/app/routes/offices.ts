@@ -27,4 +27,18 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
+router.post('/create', async (req, res, next) => {
+    try {
+        const office = req.body;
+        const result = await OfficesCtrl.createOffice(office);
+
+        res.status(HttpStatus.CREATED).json(result);
+
+    } catch (err) {
+        next(err);
+    }
+});
+
+
+
 export const OfficesRouter = router;
