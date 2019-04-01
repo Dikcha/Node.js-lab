@@ -52,6 +52,17 @@ router.put('/update/:id', async (req, res, next) => {
     }
 });
 
+router.delete('/delete', async (req, res, next) => {
+    try {
+        const officeId = req.body.id;
+        const result = await OfficesCtrl.deleteOffice(officeId);
+
+        res.status(HttpStatus.OK).json(result);
+
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 export const OfficesRouter = router;

@@ -52,4 +52,13 @@ export class OfficesService extends Service {
         return await OfficesModel.findById(officeId);
     }
 
+    async deleteOffice(officeId) {
+        validateId(officeId);
+
+        await OfficesModel.destroy({
+            where: {
+                id: officeId,
+            },
+        });
+    }
 }

@@ -12,7 +12,11 @@ export class OfficesModel extends Model<OfficesModel> {
     @Column(DataType.BIGINT.UNSIGNED)
     id: number;
 
-    @HasMany(() => AgentsModel)
+    @HasMany(() => AgentsModel, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        hooks: true
+    })
     agents: AgentsModel;
 
     @AllowNull(false)
