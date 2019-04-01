@@ -1,6 +1,8 @@
 import { Service } from "../base";
 import { IMeta } from "../base/interfaces";
 import { OfficesModel } from "../../models/offices";
+import { validateId } from "../../modules/validator/get_property_by_id";
+import { checkIfOfficeExistById } from "../../models/offices/methods";
 
 export class OfficesService extends Service {
     constructor() {
@@ -18,5 +20,14 @@ export class OfficesService extends Service {
             ],
             raw: true,
         })
+    }
+
+    async getOfficeById(officeId) {
+        validateId(officeId);
+        await checkIfOfficeExistById(officeId);
+
+        return await OfficesModel.findById(officeId, {
+            raw: true,
+        });
     }
 }
