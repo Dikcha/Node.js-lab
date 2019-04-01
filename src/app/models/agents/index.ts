@@ -25,7 +25,11 @@ export class AgentsModel extends Model<AgentsModel> {
     @Column(DataType.BIGINT.UNSIGNED)
     id: number;
 
-    @HasMany(() => PropertiesModel)
+    @HasMany(() => PropertiesModel, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        hooks: true
+    })
     properties: PropertiesModel;
 
     @AllowNull(false)

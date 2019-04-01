@@ -51,4 +51,14 @@ export class AgentsService extends Service {
 
         return await AgentsModel.findById(agentId);
     }
+
+    async deleteAgent(agentId) {
+        validateId(agentId);
+
+        await AgentsModel.destroy({
+            where: {
+                id: agentId,
+            },
+        });
+    }
 }

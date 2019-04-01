@@ -49,6 +49,17 @@ router.put('/update/:id', async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-})
+});
+
+router.delete('/delete', async (req, res, next) => {
+    try {
+        const id = +req.body.id;
+        const result = await AgentsCtrl.deleteAgent(id);
+
+        res.status(HttpStatus.OK).json(result);
+    } catch (err) {
+        next(err);
+    }
+});
 
 export const AgentsRouter = router;

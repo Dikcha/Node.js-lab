@@ -54,7 +54,7 @@ router.put('/update/:id', async (req, res, next) => {
 
 router.delete('/delete', async (req, res, next) => {
     try {
-        const propertyId = req.body.id;
+        const propertyId = +req.body.id;
         await PropertiesCtrl.deleteProperty(propertyId);
 
         res.status(HttpStatus.OK).json();
