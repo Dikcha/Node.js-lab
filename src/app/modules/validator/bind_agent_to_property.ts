@@ -1,5 +1,5 @@
 import * as joi from 'joi';
-import { bindAgentToPropertySchema } from "./schemas/bind_agent_to_property";
+import { bindAgentToPropertySchema } from "./schemas/bind_agent_to_property_schema";
 
 export function validateBindAgentToProperty(propertyId, agentId) {
     const result = joi.validate({ propertyId, agentId }, bindAgentToPropertySchema);

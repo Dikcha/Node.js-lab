@@ -4,3 +4,4 @@ export * from './create_agent';
 export * from './update_agent';
 export * from './delete_agent';
 export * from './bind_agent_to_office';
+export * from './unbind_office';

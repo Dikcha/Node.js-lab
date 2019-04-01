@@ -65,17 +65,32 @@ router.delete('/delete', async (req, res, next) => {
 });
 
 router.put('/bind', async (req, res, next) => {
-   try {
-       const officeId = req.body.officeId;
-       const agentId = req.body.agentId;
+    try {
+        const officeId = +req.body.officeId;
+        const agentId = +req.body.agentId;
 
-       const result = await AgentsCtrl.bindAgentToProperty(officeId, agentId);
+        const result = await AgentsCtrl.bindAgentToProperty(officeId, agentId);
 
-       res.status(HttpStatus.OK).json(result);
+        res.status(HttpStatus.OK).json(result);
 
-   } catch (err) {
-       next(err);
-   }
+    } catch (err) {
+        next(err);
+    }
 });
+
+router.put('/unbind', async (req, res, next) => {
+    try {
+        const agentId = +req.body.agentId;
+
+        const result = await AgentsCtrl.unbindOffice(agentId);
+
+        res.status(HttpStatus.OK).json(result);
+
+    } catch (err) {
+        next(err);
+    }
+});
+
+
 
 export const AgentsRouter = router;
