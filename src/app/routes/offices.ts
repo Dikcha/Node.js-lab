@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
         res.status(HttpStatus.OK).json(result);
 
     } catch (err) {
+        res.status(err.status).json(err);
         next(err);
     }
 });
@@ -23,6 +24,7 @@ router.get('/:id', async (req, res, next) => {
         res.status(HttpStatus.OK).json(result);
 
     } catch (err) {
+        res.status(err.status).json(err);
         next(err);
     }
 });
@@ -35,6 +37,7 @@ router.post('/create', async (req, res, next) => {
         res.status(HttpStatus.CREATED).json(result);
 
     } catch (err) {
+        res.status(err.status).json(err);
         next(err);
     }
 });
@@ -48,6 +51,7 @@ router.put('/update/:id', async (req, res, next) => {
         res.status(HttpStatus.OK).json(result);
 
     } catch (err) {
+        res.status(err.status).json(err);
         next(err);
     }
 });
@@ -60,6 +64,7 @@ router.delete('/delete', async (req, res, next) => {
         res.status(HttpStatus.OK).json(result);
 
     } catch (err) {
+        res.status(err.status).json(err);
         next(err);
     }
 });
@@ -71,6 +76,7 @@ router.get('/:id/agents', async (req, res, next) => {
         res.status(HttpStatus.OK).json(result);
 
     } catch (err) {
+        res.status(err.status).json(err);
         next(err);
     }
 });

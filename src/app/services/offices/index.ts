@@ -4,7 +4,7 @@ import { OfficesModel } from "../../models/offices";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { checkIfOfficeExistById } from "../../models/offices/methods";
 import { validateCreateOffice } from "../../modules/validator/create_office";
-import { validateUpdateOffice } from "../../modules/validator/udapte_office";
+import { validateUpdateOffice } from "../../modules/validator/update_office";
 import { getLimitFromRequest, getOffsetFromRequest } from "../../modules/helper";
 import { AgentsModel } from "../../models/agents";
 

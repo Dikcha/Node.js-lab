@@ -1,4 +1,5 @@
 import { PropertiesModel } from "../";
+import { NotFoundError } from "../../../modules/error";
 
 export async function checkIfPropertyExistById(propertyId) {
     const property = await PropertiesModel.findOne({
@@ -8,6 +9,6 @@ export async function checkIfPropertyExistById(propertyId) {
     });
 
     if (!property) {
-        throw new Error('Property id does not exist');
+        throw new NotFoundError('Property with such id does not exist');
     }
 }

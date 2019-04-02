@@ -3,7 +3,7 @@ import { IMeta } from "../base/interfaces";
 import { PropertiesModel } from "../../models/properties";
 import { validateId } from "../../modules/validator/get_property_by_id";
 import { validateCreateProperty } from "../../modules/validator/create_property";
-import { validateUpdateProperty } from "../../modules/validator/udpdate_property";
+import { validateUpdateProperty } from "../../modules/validator/update_property";
 import { validateBindAgentToProperty } from "../../modules/validator/bind_agent_to_property";
 import { validateUnbindAgent } from "../../modules/validator/unbind_agent";
 import { checkIfPropertyExistById } from "../../models/properties/methods";

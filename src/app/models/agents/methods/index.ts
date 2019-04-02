@@ -1,4 +1,5 @@
 import { AgentsModel } from "../";
+import { NotFoundError } from "../../../modules/error";
 
 export async function checkIfAgentExistById(agentId) {
     const property = await AgentsModel.findOne({
@@ -8,6 +9,6 @@ export async function checkIfAgentExistById(agentId) {
     });
 
     if (!property) {
-        throw new Error('Agent id does not exist');
+        throw new NotFoundError('Agent with such id does not exist');
     }
 }
