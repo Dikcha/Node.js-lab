@@ -1,11 +1,10 @@
 import * as winston from 'winston';
 import * as expressWinston from 'express-winston';
 
-
 export class LoggerService {
     private readonly logger;
 
-    constructor() {
+    constructor(message: string = "") {
 
         this.logger = expressWinston.logger({
             transports: [
@@ -21,7 +20,7 @@ export class LoggerService {
                 }),
                 winston.format.simple()
             ),
-            msg: `{{res.statusCode}} {{req.method}} {{req.url}} {{JSON.stringify(req.body)}} {{JSON.stringify(req.query)}} {{res.responseTime}}`,
+            msg: `{{res.statusCode}} {{req.method}} {{req.url}} {{JSON.stringify(req.body)}} {{JSON.stringify(req.query)}} {{res.responseTime}} ${message}`,
             meta: false,
             expressFormat: false,
             colorize: false,
